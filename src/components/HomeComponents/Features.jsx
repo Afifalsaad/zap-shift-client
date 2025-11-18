@@ -3,6 +3,7 @@ import liveTracking from "../../assets/live-tracking.png";
 import safeDelivery from "../../assets/safe-delivery.png";
 
 const Features = () => {
+
   return (
     <div className="py-20 border-y-2 border-dashed">
       <div className="flex items-center bg-[#eaeced] p-8 rounded-xl mb-5">
