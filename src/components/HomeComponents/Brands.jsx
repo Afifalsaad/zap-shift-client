@@ -21,11 +21,12 @@ const brandLogos = [
 
 const Brands = () => {
   return (
-    <div className="my-26">
+    <div className="my-26 max-w-5xl mx-auto">
       <h1 className="text-center text-secondary font-bold text-2xl mb-6">
         We've helped thousands of sales teams
       </h1>
       <Swiper
+      className="mb-4"
         slidesPerView={4}
         centeredSlides={true}
         spaceBetween={30}
