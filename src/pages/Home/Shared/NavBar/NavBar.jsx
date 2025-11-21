@@ -66,7 +66,14 @@ const NavBar = () => {
             Log Out
           </a>
         ) : (
-          <Link className="btn" to="/login">Log In</Link>
+          <div>
+            <Link className="btn" to="/login">
+              Log In
+            </Link>
+            <Link className="btn btn-primary text-black mx-2" to="/rider">
+              Be A Rider
+            </Link>
+          </div>
         )}
       </div>
     </div>

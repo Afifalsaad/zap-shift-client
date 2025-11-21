@@ -1,7 +1,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import useAuth from "../../../hooks/useAuth";
-import { Link } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import axios from "axios";
 
 const Register = () => {
@@ -12,6 +12,9 @@ const Register = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
+  const location = useLocation();
+  const navigate = useNavigate();
+  console.log("from register", location);
 
   const handleRegistration = (data) => {
     console.log("Data", data, data.photo[0]);
@@ -37,11 +40,11 @@ const Register = () => {
             photoURL: res.data.data.url,
           };
 
-          UpdateUserProfile(userProfile)
-          .then(() => {
+          UpdateUserProfile(userProfile).then(() => {
             console.log("profile image uploaded done");
           });
         });
+        navigate(location?.state || "/");
       })
       .catch((error) => console.log(error.message));
   };
@@ -117,8 +120,11 @@ const Register = () => {
         </form>
 
         <p>
-          Already have an account?{" "}
-          <Link className="text-blue-900 underline" to="/login">
+          Already have an account?
+          <Link
+            state={location.state}
+            className="text-blue-900 underline"
+            to="/login">
             LogIn
           </Link>
         </p>

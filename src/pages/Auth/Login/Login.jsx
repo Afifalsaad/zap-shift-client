@@ -1,17 +1,20 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import useAuth from "../../../hooks/useAuth";
-import { Link } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 
 const Login = () => {
   const { register, handleSubmit } = useForm();
-  const { logIn, googleLogin, logOut } = useAuth();
+  const { logIn, googleLogin } = useAuth();
+  const location = useLocation();
+  const navigate = useNavigate();
 
   const onSubmit = (data) => {
     console.log(data);
     logIn(data.email, data.password)
       .then((res) => {
         console.log(res.user);
+        navigate(location?.state || "/");
       })
       .catch((error) => {
         console.log(error.message);
@@ -22,6 +25,7 @@ const Login = () => {
     googleLogin()
       .then((res) => {
         console.log(res.user);
+        navigate(location?.state || "/");
       })
       .catch((error) => {
         console.log(error.message);
@@ -53,8 +57,16 @@ const Login = () => {
             <button className="btn btn-neutral mt-4">Login</button>
           </fieldset>
         </form>
-        
-          <p>create an account <Link className="text-blue-900 underline" to="/register">Register</Link></p>
+
+        <p>
+          create an account{" "}
+          <Link
+            state={location.state}
+            className="text-blue-900 underline"
+            to="/register">
+            Register
+          </Link>
+        </p>
 
         <p className="text-center">OR</p>
 
