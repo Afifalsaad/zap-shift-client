@@ -1,6 +1,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import useAuth from "../../../hooks/useAuth";
+import { Link } from "react-router";
 
 const Login = () => {
   const { register, handleSubmit } = useForm();
@@ -24,14 +25,6 @@ const Login = () => {
       })
       .catch((error) => {
         console.log(error.message);
-      });
-  };
-
-  const handleLogout = () => {
-    logOut()
-      .then()
-      .catch((error) => {
-        console.log(error);
       });
   };
 
@@ -60,6 +53,8 @@ const Login = () => {
             <button className="btn btn-neutral mt-4">Login</button>
           </fieldset>
         </form>
+        
+          <p>create an account <Link className="text-blue-900 underline" to="/register">Register</Link></p>
 
         <p className="text-center">OR</p>
 
@@ -90,9 +85,6 @@ const Login = () => {
             </g>
           </svg>
           Login with Google
-        </button>
-        <button onClick={handleLogout} className="bg-gray-50 p-4 text-bold">
-          Logout
         </button>
       </div>
     </div>

@@ -1,10 +1,18 @@
 import React from "react";
 import Logo from "../../../../components/Logo/Logo";
-import { NavLink } from "react-router";
+import { Link, NavLink } from "react-router";
 import useAuth from "../../../../hooks/useAuth";
 
 const NavBar = () => {
-  const { user } = useAuth();
+  const { user, logOut } = useAuth();
+
+  const handleLogout = () => {
+    logOut()
+      .then()
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   const links = (
     <>
@@ -52,9 +60,14 @@ const NavBar = () => {
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">{links}</ul>
       </div>
-      {user ? `${user.displayName}` : ""}
       <div className="navbar-end">
-        <a className="btn">Button</a>
+        {user ? (
+          <a onClick={handleLogout} className="btn">
+            Log Out
+          </a>
+        ) : (
+          <Link className="btn" to="/login">Log In</Link>
+        )}
       </div>
     </div>
   );

@@ -7,6 +7,7 @@ import {
   GoogleAuthProvider,
   onAuthStateChanged,
   signOut,
+  updateProfile,
 } from "firebase/auth";
 import { auth } from "../../Firebase/firebase.init";
 
@@ -33,6 +34,10 @@ const AuthProvider = ({ children }) => {
     return signOut(auth)
   }
 
+  const UpdateUserProfile = (profile) => {
+    return updateProfile(auth.currentUser, profile)
+  }
+
   // Observer
   useEffect(() => {
     const unSubscriber = onAuthStateChanged(auth, (currentUser) => {
@@ -46,10 +51,12 @@ const AuthProvider = ({ children }) => {
 
   const AuthInfo = {
     user,
+    loading,
     registerUser,
     logIn,
     googleLogin,
     logOut,
+    UpdateUserProfile,
   };
 
   return <AuthContext value={AuthInfo}>{children}</AuthContext>;
