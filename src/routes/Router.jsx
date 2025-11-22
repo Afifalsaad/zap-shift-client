@@ -7,6 +7,7 @@ import Login from "../pages/Auth/Login/Login";
 import Register from "../pages/Auth/Register/Register";
 import PrivateRoutes from "./PrivateRoutes";
 import Rider from "../pages/Rider/Rider";
+import ForgotPassword from "../pages/Auth/Login/ForgotPassword";
 
 export const router = createBrowserRouter([
   {
@@ -24,6 +25,10 @@ export const router = createBrowserRouter([
             <Rider></Rider>
           </PrivateRoutes>
         ),
+      },
+      {
+        path: "forgotPassword",
+        Component: ForgotPassword,
       },
       {
         path: "/coverage",

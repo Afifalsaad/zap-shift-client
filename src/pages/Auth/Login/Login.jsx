@@ -51,9 +51,9 @@ const Login = () => {
               {...register("password")}
               placeholder="Password"
             />
-            <div>
+            <Link to='/forgotPassword'>
               <a className="link link-hover">Forgot password?</a>
-            </div>
+            </Link>
             <button className="btn btn-neutral mt-4">Login</button>
           </fieldset>
         </form>
