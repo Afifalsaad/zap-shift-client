@@ -9,6 +9,9 @@ import PrivateRoutes from "./PrivateRoutes";
 import Rider from "../pages/Rider/Rider";
 import ForgotPassword from "../pages/Auth/Login/ForgotPassword";
 import SendParcel from "../pages/SendParcel/SendParcel";
+import DashboardLayout from "../layouts/DashboardLayout";
+import { Component } from "react";
+import MyParcels from "../pages/DashBoard/MyParcels/MyParcels";
 
 export const router = createBrowserRouter([
   {
@@ -38,12 +41,12 @@ export const router = createBrowserRouter([
             <SendParcel></SendParcel>
           </PrivateRoutes>
         ),
-        loader: () => fetch("/warehouses.json").then((res) => res.json()),
+        loader: () => fetch("warehouses.json").then((res) => res.json()),
       },
       {
         path: "/coverage",
         Component: Coverage,
-        loader: () => fetch("/warehouses.json").then((res) => res.json()),
+        loader: () => fetch("warehouses.json").then((res) => res.json()),
       },
     ],
   },
@@ -58,6 +61,20 @@ export const router = createBrowserRouter([
       {
         path: "register",
         Component: Register,
+      },
+    ],
+  },
+  {
+    path: "dashboard",
+    element: (
+      <PrivateRoutes>
+        <DashboardLayout></DashboardLayout>
+      </PrivateRoutes>
+    ),
+    children: [
+      {
+        path: "my-parcels",
+        Component: MyParcels,
       },
     ],
   },

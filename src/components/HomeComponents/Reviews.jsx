@@ -5,7 +5,6 @@ import { Swiper, SwiperSlide } from "swiper/react";
 
 const Reviews = ({ reviews }) => {
   const data = use(reviews);
-  console.log(data);
 
   return (
     <div>

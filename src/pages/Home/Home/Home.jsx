@@ -7,7 +7,7 @@ import Features from '../../../components/HomeComponents/Features';
 import Reviews from '../../../components/HomeComponents/Reviews';
 import FAQ from '../../../components/HomeComponents/FAQ';
 
-const reviews = fetch('reviews.json').then(res=>res.json())
+const reviews = fetch('/reviews.json').then(res=>res.json())
 
 const Home = () => {
     return (

@@ -48,7 +48,7 @@ const SendParcel = () => {
         cost = minCharge + extraCharge;
       }
     }
-
+    data.cost = cost
     Swal.fire({
       title: "Agree with our charge?",
       text: `Your cost will be ${cost} taka`,
@@ -59,7 +59,8 @@ const SendParcel = () => {
       confirmButtonText: "Yes, Confirm It!",
     }).then((result) => {
       if (result.isConfirmed) {
-        axiosSecure.post("/parcels", data).then((res) => {
+        axiosSecure.post("/parcels", data)
+        .then((res) => {
           console.log("after saving data", res.data);
         });
 
@@ -232,7 +233,6 @@ const SendParcel = () => {
                 {/* Receiver Email */}
                 <label className="font-bold text-md">Receiver Email</label>
                 <input
-                  defaultValue={user?.email}
                   type="email"
                   {...register("receiverEmail")}
                   className="input w-full mb-4"
