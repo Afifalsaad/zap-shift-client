@@ -34,7 +34,7 @@ const HowItWorks = () => {
       <h1 className="text-secondary text-xl font-bold my-4">How Its Works</h1>
       <div className="grid grid-cols-4 gap-4">
         {info.map((i) => (
-          <div className="p-6 bg-[#eaeced] rounded-xl">
+          <div key={i._id} className="p-6 bg-[#eaeced] rounded-xl">
             <div>
               <div>
                 <img src={i.icon} alt="" />

@@ -30,8 +30,8 @@ const SendParcel = () => {
 
   const handleSendParcel = (data) => {
     const isSameDistrict = data.senderDistrict === data.receiverDistrict;
-    const isDocument = data.ParcelType === "document";
-    const parcelWeight = parseFloat(data.ParcelWeight);
+    const isDocument = data.parcelType === "document";
+    const parcelWeight = parseFloat(data.parcelWeight);
     let cost = 0;
 
     if (isDocument) {
@@ -49,6 +49,7 @@ const SendParcel = () => {
       }
     }
     data.cost = cost
+    console.log(cost)
     Swal.fire({
       title: "Agree with our charge?",
       text: `Your cost will be ${cost} taka`,
@@ -86,7 +87,7 @@ const SendParcel = () => {
             <label className="label mr-8">
               <input
                 type="radio"
-                {...register("ParcelType")}
+                {...register("parcelType")}
                 value="document"
                 className="radio"
                 defaultChecked
@@ -96,7 +97,7 @@ const SendParcel = () => {
             <label className="label">
               <input
                 type="radio"
-                {...register("ParcelType")}
+                {...register("parcelType")}
                 value="non-document"
                 className="radio"
               />
@@ -110,7 +111,7 @@ const SendParcel = () => {
               <label className="font-bold">Parcel Name</label>
               <input
                 type="text"
-                {...register("ParcelName")}
+                {...register("parcelName")}
                 className="input w-full"
                 placeholder="Parcel Name"
               />
@@ -119,7 +120,7 @@ const SendParcel = () => {
               <label className="font-bold">Parcel Weight (kg)</label>
               <input
                 type="number"
-                {...register("ParcelWeight")}
+                {...register("parcelWeight")}
                 className="input w-full"
                 placeholder="Parcel Weight"
               />

@@ -11,10 +11,22 @@ const Payment = () => {
     queryKey: ["parcels", id],
     queryFn: async () => {
       const res = await axiosSecure.get(`/parcels/${id}`);
-      console.log(res.data);
+      console.log(parcel)
       return res.data;
     },
   });
+
+  const handlePayment = async () => {
+    const paymentInfo = {
+      cost: parcel.cost,
+      parcelId: parcel._id,
+      senderEmail: parcel.senderEmail,
+      parcelName: parcel.ParcelName,
+    };
+    const res = await axiosSecure.post("/payment-checkout-session-old", paymentInfo);
+    console.log(res.data);
+    window.location.href = res.data.url;
+  };
 
   if (isLoading) {
     return (
@@ -26,8 +38,12 @@ const Payment = () => {
 
   return (
     <div>
-      <h2>Please Pay for : {parcel.ParcelName}</h2>
-      <button className="btn btn-primary text-black">Pay Now</button>
+      <h2>
+        Please Pay {`${parcel.cost}`} for : {parcel.ParcelName}
+      </h2>
+      <button onClick={handlePayment} className="btn btn-primary text-black">
+        Pay Now
+      </button>
     </div>
   );
 };

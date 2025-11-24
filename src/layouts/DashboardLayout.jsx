@@ -67,13 +67,15 @@ const DashboardLayout = () => {
 
             {/* My-Parcels */}
             <li>
-              <button
-                className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                data-tip="My-Parcels">
-                {/* Parcel icon */}
-                <GrDeliver />
-                <span className="is-drawer-close:hidden">My Parcels</span>
-              </button>
+              <Link to="/dashboard/my-parcels">
+                <button
+                  className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                  data-tip="My-Parcels">
+                  {/* Parcel icon */}
+                  <GrDeliver />
+                  <span className="is-drawer-close:hidden">My Parcels</span>
+                </button>
+              </Link>
             </li>
 
             {/* List item */}
