@@ -11,6 +11,7 @@ const MyParcels = () => {
   const axiosSecure = useAxiosSecure();
 
   const { user } = useAuth();
+  console.log(user);
 
   const { data: parcels = [], refetch } = useQuery({
     queryKey: ["my-parcels", user?.email],
@@ -32,8 +33,6 @@ const MyParcels = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         axiosSecure.delete(`/parcels/${id}`).then((res) => {
-          console.log(res.data);
-
           if (res.data.deletedCount) {
             Swal.fire({
               title: "Deleted!",
@@ -48,7 +47,6 @@ const MyParcels = () => {
   };
 
   const handlePayment = async (parcel) => {
-    console.log(parcel.cost);
     const paymentInfo = {
       cost: parcel.cost,
       parcelName: parcel.parcelName,
@@ -59,7 +57,6 @@ const MyParcels = () => {
       "/payment-checkout-session",
       paymentInfo
     );
-    // console.log(res.data.url)
     window.location.assign(res.data.url);
   };
 

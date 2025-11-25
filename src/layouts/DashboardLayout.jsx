@@ -1,4 +1,5 @@
 import React from "react";
+import { FaRegCreditCard } from "react-icons/fa6";
 import { GrDeliver } from "react-icons/gr";
 import { Link, Outlet } from "react-router";
 
@@ -28,7 +29,7 @@ const DashboardLayout = () => {
               <path d="M14 10l2 2l-2 2"></path>
             </svg>
           </label>
-          <div className="px-4">Navbar Title</div>
+          <div className="px-4">Zap Dashboard</div>
         </nav>
         {/* Page content here */}
         <Outlet></Outlet>
@@ -66,8 +67,8 @@ const DashboardLayout = () => {
             </li>
 
             {/* My-Parcels */}
-            <li>
-              <Link to="/dashboard/my-parcels">
+            <Link to="/dashboard/my-parcels">
+              <li>
                 <button
                   className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
                   data-tip="My-Parcels">
@@ -75,8 +76,24 @@ const DashboardLayout = () => {
                   <GrDeliver />
                   <span className="is-drawer-close:hidden">My Parcels</span>
                 </button>
-              </Link>
-            </li>
+              </li>
+            </Link>
+
+
+            {/* Payment History */}
+            <Link to={"/dashboard/payment-history"}>
+              <li>
+                <button
+                  className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                  data-tip="Payment History">
+                  {/* Card icon */}
+                  <FaRegCreditCard />
+                  <span className="is-drawer-close:hidden">
+                    Payment History
+                  </span>
+                </button>
+              </li>
+            </Link>
 
             {/* List item */}
             <li>
