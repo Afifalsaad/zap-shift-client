@@ -2,12 +2,14 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import useAuth from "../../../hooks/useAuth";
 import { Link, useLocation, useNavigate } from "react-router";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 const Login = () => {
   const { register, handleSubmit } = useForm();
   const { logIn, googleLogin } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
+  const axiosSecure = useAxiosSecure();
 
   const onSubmit = (data) => {
     console.log(data);
@@ -22,8 +24,21 @@ const Login = () => {
 
   const handleGoogleLogin = () => {
     googleLogin()
-      .then(() => {
+      .then((res) => {
         navigate(location?.state || "/");
+
+        // create user in the database
+        const userInfo = {
+          email: res.user.email,
+          name: res.user.displayName,
+          photoURL: res.user.photoURL,
+        };
+
+        axiosSecure.post("/users", userInfo).then((result) => {
+          if (result.data.insertedId) {
+            console.log("user created successfully");
+          }
+        });
       })
       .catch((error) => {
         console.log(error.message);

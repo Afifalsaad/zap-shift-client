@@ -21,7 +21,6 @@ const SendParcel = () => {
   const regions = [...new Set(regionsDuplicate)];
   const senderRegion = useWatch({ control, name: "senderRegion" });
   const receiverRegion = useWatch({ control, name: "receiverRegion" });
-  //   console.log()
 
   const districtsByRegions = (region) => {
     const filteredRegions = serviceCenters.filter((c) => c.region === region);
