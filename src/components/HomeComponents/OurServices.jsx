@@ -52,10 +52,12 @@ const OurServices = () => {
         </p>
       </div>
       <div className="grid grid-cols-3 gap-4">
-        {services.map((s) => (
-          <div className="border p-10 flex flex-col items-center text-center bg-white text-secondary rounded-3xl hover:bg-primary hover:cursor-pointer">
+        {services.map((s, index) => (
+          <div
+            key={index}
+            className="border p-10 flex flex-col items-center text-center bg-white text-secondary rounded-3xl hover:bg-primary hover:cursor-pointer">
             <div>
-            <img src={s.icon} alt="" />
+              <img src={s.icon} alt="" />
             </div>
             <h3 className="font-bold my-3">{s.title}</h3>
             <p className="text-[#888888]">{s.description}</p>

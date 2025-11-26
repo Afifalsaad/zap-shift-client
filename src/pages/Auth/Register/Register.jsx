@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import useAuth from "../../../hooks/useAuth";
 import { Link, useLocation, useNavigate } from "react-router";
 import axios from "axios";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 const Register = () => {
   const { registerUser, UpdateUserProfile } = useAuth();
@@ -14,11 +15,9 @@ const Register = () => {
   } = useForm();
   const location = useLocation();
   const navigate = useNavigate();
-  console.log("from register", location);
+  const axiosSecure = useAxiosSecure();
 
   const handleRegistration = (data) => {
-    console.log("Data", data, data.photo[0]);
-
     const profileImage = data.photo[0];
 
     const email = data.email;
@@ -33,16 +32,27 @@ const Register = () => {
         }`;
 
         axios.post(image_API_KEY, formData).then((res) => {
-          console.log("after image upload", res.data.data.url);
+          const photoURL = res.data.data.url;
 
           const userProfile = {
             displayName: data.name,
-            photoURL: res.data.data.url,
+            photoURL: photoURL,
           };
 
-          UpdateUserProfile(userProfile).then(() => {
-            console.log("profile image uploaded done");
+          // create user in the database
+          const userInfo = {
+            email: data.email,
+            name: data.name,
+            photoURL: photoURL,
+          };
+          axiosSecure.post("/users", userInfo).then((res) => {
+            // if (res.data.insertedId) {
+            console.log("user inserted in the database", res.data);
+            // }
           });
+
+          // update profile
+          UpdateUserProfile(userProfile).then(() => {});
         });
         navigate(location?.state || "/");
       })

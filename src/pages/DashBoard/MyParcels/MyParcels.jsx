@@ -11,7 +11,6 @@ const MyParcels = () => {
   const axiosSecure = useAxiosSecure();
 
   const { user } = useAuth();
-  console.log(user);
 
   const { data: parcels = [], refetch } = useQuery({
     queryKey: ["my-parcels", user?.email],

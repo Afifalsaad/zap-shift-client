@@ -33,8 +33,8 @@ const HowItWorks = () => {
     <div className="max-w-6xl mx-auto my-28">
       <h1 className="text-secondary text-xl font-bold my-4">How Its Works</h1>
       <div className="grid grid-cols-4 gap-4">
-        {info.map((i) => (
-          <div key={i._id} className="p-6 bg-[#eaeced] rounded-xl">
+        {info.map((i,index) => (
+          <div key={index} className="p-6 bg-[#eaeced] rounded-xl">
             <div>
               <div>
                 <img src={i.icon} alt="" />

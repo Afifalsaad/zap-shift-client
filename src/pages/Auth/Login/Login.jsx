@@ -12,8 +12,7 @@ const Login = () => {
   const onSubmit = (data) => {
     console.log(data);
     logIn(data.email, data.password)
-      .then((res) => {
-        console.log(res.user);
+      .then(() => {
         navigate(location?.state || "/");
       })
       .catch((error) => {
@@ -23,8 +22,7 @@ const Login = () => {
 
   const handleGoogleLogin = () => {
     googleLogin()
-      .then((res) => {
-        console.log(res.user);
+      .then(() => {
         navigate(location?.state || "/");
       })
       .catch((error) => {
@@ -51,7 +49,7 @@ const Login = () => {
               {...register("password")}
               placeholder="Password"
             />
-            <Link to='/forgotPassword'>
+            <Link to="/forgotPassword">
               <a className="link link-hover">Forgot password?</a>
             </Link>
             <button className="btn btn-neutral mt-4">Login</button>
