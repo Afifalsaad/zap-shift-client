@@ -69,11 +69,6 @@ const Register = () => {
   const handleGoogleLogin = () => {
     googleLogin()
       .then((res) => {
-        Swal.fire({
-          title: "Account Created Successfully",
-          icon: "success",
-        });
-
         // create user in the database
         const userInfo = {
           email: res.user.email,

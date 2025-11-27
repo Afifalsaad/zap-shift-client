@@ -3,8 +3,10 @@ import { FaRegCreditCard, FaUsers } from "react-icons/fa6";
 import { GrDeliver } from "react-icons/gr";
 import { MdDirectionsBike } from "react-icons/md";
 import { Link, Outlet } from "react-router";
+import useRole from "../hooks/useRole";
 
 const DashboardLayout = () => {
+  const { role } = useRole();
   return (
     <div className="drawer lg:drawer-open max-w-7xl mx-auto">
       <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
@@ -95,31 +97,39 @@ const DashboardLayout = () => {
               </li>
             </Link>
 
-            {/* Approve Rider */}
-            <Link to={"/dashboard/approve-rider"}>
-              <li>
-                <button
-                  className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                  data-tip="Approve rider">
-                  {/* Card icon */}
-                  <MdDirectionsBike />
-                  <span className="is-drawer-close:hidden">Approve rider</span>
-                </button>
-              </li>
-            </Link>
+            {role === "admin" && (
+              <>
+                {/* Approve Rider */}
+                <Link to={"/dashboard/approve-rider"}>
+                  <li>
+                    <button
+                      className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                      data-tip="Approve rider">
+                      {/* Card icon */}
+                      <MdDirectionsBike />
+                      <span className="is-drawer-close:hidden">
+                        Approve rider
+                      </span>
+                    </button>
+                  </li>
+                </Link>
 
-            {/* Users Management */}
-            <Link to={"/dashboard/users-management"}>
-              <li>
-                <button
-                  className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                  data-tip="Manage Users">
-                  {/* Card icon */}
-                  <FaUsers></FaUsers>
-                  <span className="is-drawer-close:hidden">Manage Users</span>
-                </button>
-              </li>
-            </Link>
+                {/* Users Management */}
+                <Link to={"/dashboard/users-management"}>
+                  <li>
+                    <button
+                      className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                      data-tip="Manage Users">
+                      {/* Card icon */}
+                      <FaUsers></FaUsers>
+                      <span className="is-drawer-close:hidden">
+                        Manage Users
+                      </span>
+                    </button>
+                  </li>
+                </Link>
+              </>
+            )}
           </ul>
         </div>
       </div>

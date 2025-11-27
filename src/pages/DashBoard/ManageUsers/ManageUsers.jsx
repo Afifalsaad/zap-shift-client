@@ -16,27 +16,54 @@ const ManageUsers = () => {
     },
   });
 
-  const handleRole = (id) => {
+  const handleRole = (user) => {
     const roleInfo = { role: "admin" };
-    axiosSecure.patch(`/users/${id}`, roleInfo).then((res) => {
-      if (res.data.modifiedCount) {
-        refetch();
-        Swal.fire({
-          title: "Admin Added",
-          icon: "success",
+
+    Swal.fire({
+      title: "Are you sure?",
+      text: `You want to add ${user.name} as an admin?`,
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSecure.patch(`/users/${user._id}`, roleInfo).then((res) => {
+          if (res.data.modifiedCount) {
+            refetch();
+            Swal.fire({
+              title: "Added!",
+              text: `${user.name} has been added as an admin`,
+              icon: "success",
+            });
+          }
         });
       }
     });
   };
 
-  const removeAdmin = (id) => {
+  const removeAdmin = (user) => {
     const roleInfo = { role: "user" };
-    axiosSecure.patch(`/users/${id}`, roleInfo).then((res) => {
-      if (res.data.modifiedCount) {
-        refetch();
-        Swal.fire({
-          title: "Admin Removed",
-          icon: "success",
+    Swal.fire({
+      title: "Are you sure?",
+      text: `You want to remove ${user.name} from admin?`,
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSecure.patch(`/users/${user._id}`, roleInfo).then((res) => {
+          if (res.data.modifiedCount) {
+            refetch();
+            Swal.fire({
+              title: "Removed!",
+              text: `${user.name} has been removed admin`,
+              icon: "success",
+            });
+          }
         });
       }
     });
@@ -85,13 +112,13 @@ const ManageUsers = () => {
                 <td>
                   {user.role === "admin" ? (
                     <button
-                      onClick={() => removeAdmin(user._id)}
+                      onClick={() => removeAdmin(user)}
                       className="btn bg-red-400">
                       <TbShieldOff />
                     </button>
                   ) : (
                     <button
-                      onClick={() => handleRole(user._id)}
+                      onClick={() => handleRole(user)}
                       className="btn bg-green-400">
                       <FaUserShield />
                     </button>
