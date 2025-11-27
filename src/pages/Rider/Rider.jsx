@@ -1,6 +1,6 @@
 import React from "react";
 import agent from "../../assets/agent-pending.png";
-import { useForm, useWatch } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import useAuth from "../../hooks/useAuth";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { useLoaderData } from "react-router";
@@ -10,7 +10,6 @@ const Rider = () => {
   const {
     register,
     handleSubmit,
-    control,
     // formState: { errors },
   } = useForm();
   const { user } = useAuth();
