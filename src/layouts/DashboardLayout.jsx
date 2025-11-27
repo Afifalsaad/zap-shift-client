@@ -1,5 +1,5 @@
 import React from "react";
-import { FaRegCreditCard } from "react-icons/fa6";
+import { FaRegCreditCard, FaUsers } from "react-icons/fa6";
 import { GrDeliver } from "react-icons/gr";
 import { MdDirectionsBike } from "react-icons/md";
 import { Link, Outlet } from "react-router";
@@ -95,7 +95,7 @@ const DashboardLayout = () => {
               </li>
             </Link>
 
-            {/* Approve Riser */}
+            {/* Approve Rider */}
             <Link to={"/dashboard/approve-rider"}>
               <li>
                 <button
@@ -104,6 +104,19 @@ const DashboardLayout = () => {
                   {/* Card icon */}
                   <MdDirectionsBike />
                   <span className="is-drawer-close:hidden">Approve rider</span>
+                </button>
+              </li>
+            </Link>
+
+            {/* Users Management */}
+            <Link to={"/dashboard/users-management"}>
+              <li>
+                <button
+                  className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                  data-tip="Manage Users">
+                  {/* Card icon */}
+                  <FaUsers></FaUsers>
+                  <span className="is-drawer-close:hidden">Manage Users</span>
                 </button>
               </li>
             </Link>

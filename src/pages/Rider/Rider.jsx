@@ -20,7 +20,6 @@ const Rider = () => {
   const regions = [...new Set(regionsDuplicate)];
 
   const handleRiderApplication = (data) => {
-    console.log(data);
     axiosSecure.post("/riders", data).then((res) => {
       if (res.data.insertedId) {
         Swal.fire({

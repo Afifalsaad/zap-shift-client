@@ -4,6 +4,7 @@ import useAuth from "../../../hooks/useAuth";
 import { Link, useLocation, useNavigate } from "react-router";
 import axios from "axios";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import Swal from "sweetalert2";
 
 const Register = () => {
   const { registerUser, UpdateUserProfile, googleLogin } = useAuth();
@@ -56,13 +57,22 @@ const Register = () => {
         });
         navigate(location?.state || "/");
       })
-      .catch((error) => console.log(error.message));
+      .catch((error) => {
+        Swal.fire({
+          title: "oops!",
+          text: error.message,
+          icon: "success",
+        });
+      });
   };
 
   const handleGoogleLogin = () => {
     googleLogin()
       .then((res) => {
-        
+        Swal.fire({
+          title: "Account Created Successfully",
+          icon: "success",
+        });
 
         // create user in the database
         const userInfo = {
@@ -73,13 +83,20 @@ const Register = () => {
 
         axiosSecure.post("/users", userInfo).then((result) => {
           if (result.data.insertedId) {
-            console.log("user created successfully");
+            Swal.fire({
+              title: "Logged In",
+              icon: "success",
+            });
             navigate(location?.state || "/");
           }
         });
       })
       .catch((error) => {
-        console.log(error.message);
+        Swal.fire({
+          title: "oops!",
+          text: { error },
+          icon: "success",
+        });
       });
   };
 
