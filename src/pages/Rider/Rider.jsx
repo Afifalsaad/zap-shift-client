@@ -1,6 +1,6 @@
 import React from "react";
 import agent from "../../assets/agent-pending.png";
-import { useForm } from "react-hook-form";
+import { useForm, useWatch } from "react-hook-form";
 import useAuth from "../../hooks/useAuth";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { useLoaderData } from "react-router";
@@ -10,6 +10,7 @@ const Rider = () => {
   const {
     register,
     handleSubmit,
+    control,
     // formState: { errors },
   } = useForm();
   const { user } = useAuth();
@@ -18,6 +19,13 @@ const Rider = () => {
   const serviceCenters = useLoaderData();
   const regionsDuplicate = serviceCenters.map((c) => c.region);
   const regions = [...new Set(regionsDuplicate)];
+  const senderRegion = useWatch({ control, name: "ridersRegion" });
+
+  const districtsByRegions = (region) => {
+    const filteredRegions = serviceCenters.filter((c) => c.region === region);
+    const districts = filteredRegions.map((r) => r.district);
+    return districts;
+  };
 
   const handleRiderApplication = (data) => {
     axiosSecure.post("/riders", data).then((res) => {
@@ -112,6 +120,20 @@ const Rider = () => {
                     </select>
                   </div>
                 </div>
+
+                {/* Riders's District */}
+                <label className="font-bold text-md">District</label>
+                <select
+                  {...register("ridersDistrict")}
+                  defaultValue="Select Your District"
+                  className="select w-full mb-4">
+                  <option>Select Your District</option>
+                  {districtsByRegions(senderRegion).map((r, index) => (
+                    <option value={r} key={index}>
+                      {r}
+                    </option>
+                  ))}
+                </select>
 
                 {/* About You */}
                 <label className="font-bold text-md">About You</label>

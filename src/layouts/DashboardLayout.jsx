@@ -5,6 +5,7 @@ import { MdDirectionsBike } from "react-icons/md";
 import { Link, Outlet } from "react-router";
 import useRole from "../hooks/useRole";
 import { LuNotebookPen } from "react-icons/lu";
+import { FaTasks } from "react-icons/fa";
 
 const DashboardLayout = () => {
   const { role } = useRole();
@@ -99,6 +100,26 @@ const DashboardLayout = () => {
               </li>
             </Link>
 
+            {/* Rider Only Routes */}
+            {role === "rider" && (
+              <>
+                <Link to={"/dashboard/assigned-deliveries"}>
+                  <li>
+                    <button
+                      className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                      data-tip="Assigned Deliveries">
+                      {/* Card icon */}
+                      <FaTasks />
+                      <span className="is-drawer-close:hidden">
+                        Assigned Deliveries
+                      </span>
+                    </button>
+                  </li>
+                </Link>
+              </>
+            )}
+
+            {/* Admin Only Route */}
             {role === "admin" && (
               <>
                 {/* Approve Rider */}

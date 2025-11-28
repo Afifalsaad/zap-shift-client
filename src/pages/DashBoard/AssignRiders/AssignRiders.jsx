@@ -1,8 +1,10 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
+import Swal from "sweetalert2";
 
 const AssignRiders = () => {
+  const [selectedParcel, setSelectedParcel] = useState(null);
   const axiosSecure = useAxiosSecure();
   const modalRef = useRef();
 
@@ -16,8 +18,44 @@ const AssignRiders = () => {
     },
   });
 
+  const { data: riders = [] } = useQuery({
+    queryKey: ["riders", selectedParcel?.senderDistrict, "available"],
+    enabled: !!selectedParcel,
+    queryFn: async () => {
+      const res = await axiosSecure.get(
+        `/riders?status=approved&ridersDistrict=${selectedParcel.senderDistrict}&workStatus=available`
+      );
+      return res.data;
+    },
+  });
+
   const handleAssignRiderModal = (parcel) => {
+    setSelectedParcel(parcel);
+    console.log(selectedParcel);
     modalRef.current.showModal();
+  };
+
+  const handleAssignRider = (rider) => {
+    const riderInfo = {
+      riderId: rider._id,
+      parcelId: selectedParcel._id,
+      riderEmail: rider.email,
+      riderName: rider.name,
+      riderPhoneNumber: rider.phoneNumber,
+    };
+
+    axiosSecure
+      .patch(`/parcels/${selectedParcel._id}`, riderInfo)
+      .then((res) => {
+        console.log(res.data);
+        if (res.data.modifiedCount) {
+          modalRef.current.close();
+          Swal.fire({
+            title: "Confirmed!",
+            icon: "success",
+          });
+        }
+      });
   };
 
   return (
@@ -50,7 +88,7 @@ const AssignRiders = () => {
                   <button
                     onClick={() => handleAssignRiderModal(parcel)}
                     className="btn btn-primary text-black">
-                    Assign Rider
+                    Find Riders
                   </button>
                 </td>
               </tr>
@@ -62,10 +100,38 @@ const AssignRiders = () => {
         {/* Open the modal using document.getElementById('ID').showModal() method */}
         <dialog ref={modalRef} className="modal modal-bottom sm:modal-middle">
           <div className="modal-box">
-            <h3 className="font-bold text-lg">Hello!</h3>
-            <p className="py-4">
-              Press ESC key or click the button below to close
-            </p>
+            <h3 className="font-bold text-lg">
+              Riders Available: {riders.length}
+            </h3>
+            <div className="overflow-x-auto">
+              <table className="table table-zebra">
+                {/* head */}
+                <thead>
+                  <tr>
+                    <th></th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {riders.map((rider, i) => (
+                    <tr key={i}>
+                      <th>{i + 1}</th>
+                      <td>{rider.name}</td>
+                      <td>{rider.email}</td>
+                      <td>
+                        <button
+                          onClick={() => handleAssignRider(rider)}
+                          className="btn btn-primary text-black">
+                          Assign
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
             <div className="modal-action">
               <form method="dialog">
                 {/* if there is a button in form, it will close the modal */}

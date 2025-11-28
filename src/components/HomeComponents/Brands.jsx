@@ -3,7 +3,6 @@ import "swiper/css";
 import { Swiper, SwiperSlide } from "swiper/react";
 import amazon from "../../assets/brands/amazon.png";
 import amazon_vector from "../../assets/brands/amazon_vector.png";
-import casio from "../../assets/brands/casio.png";
 import moonStar from "../../assets/brands/moonstar.png";
 import randstad from "../../assets/brands/randstad.png";
 import star from "../../assets/brands/star.png";
