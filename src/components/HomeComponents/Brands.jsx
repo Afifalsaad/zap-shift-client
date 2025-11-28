@@ -29,12 +29,12 @@ const Brands = () => {
       className="mb-4"
         slidesPerView={4}
         centeredSlides={true}
-        spaceBetween={30}
+        spaceBetween={20}
         grabCursor={true}
         modules={[Autoplay]}
         loop={true}
         autoplay={{
-          delay: 1000,
+          delay: 500,
           disableOnInteraction: false,
         }}>
         {brandLogos.map((logo, index) => (
