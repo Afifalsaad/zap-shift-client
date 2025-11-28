@@ -4,6 +4,7 @@ import { GrDeliver } from "react-icons/gr";
 import { MdDirectionsBike } from "react-icons/md";
 import { Link, Outlet } from "react-router";
 import useRole from "../hooks/useRole";
+import { LuNotebookPen } from "react-icons/lu";
 
 const DashboardLayout = () => {
   const { role } = useRole();
@@ -110,6 +111,21 @@ const DashboardLayout = () => {
                       <MdDirectionsBike />
                       <span className="is-drawer-close:hidden">
                         Approve rider
+                      </span>
+                    </button>
+                  </li>
+                </Link>
+
+                {/* Assign Riders */}
+                <Link to={"/dashboard/assign-riders"}>
+                  <li>
+                    <button
+                      className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                      data-tip="Assign riders">
+                      {/* Card icon */}
+                      <LuNotebookPen />
+                      <span className="is-drawer-close:hidden">
+                        Assign riders
                       </span>
                     </button>
                   </li>

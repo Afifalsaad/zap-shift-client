@@ -59,14 +59,14 @@ const SendParcel = () => {
       confirmButtonText: "Yes, Confirm It!",
     }).then((result) => {
       if (result.isConfirmed) {
+        Swal.fire({
+          title: "Confirmed!",
+          icon: "success",
+        });
         axiosSecure.post("/parcels", data).then((res) => {
           if (res.data.insertedId) {
             navigate("/dashboard/my-parcels");
           }
-          Swal.fire({
-            title: "Confirmed!",
-            icon: "success",
-          });
         });
       }
     });

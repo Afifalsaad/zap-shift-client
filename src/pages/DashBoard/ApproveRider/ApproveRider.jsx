@@ -8,6 +8,9 @@ import Swal from "sweetalert2";
 
 const ApproveRider = () => {
   const axiosSecure = useAxiosSecure();
+  
+
+
   const { refetch, data: riders = [] } = useQuery({
     queryKey: ["riders", "pending"],
     queryFn: async () => {
@@ -18,7 +21,7 @@ const ApproveRider = () => {
 
   const updateRider = (rider, status) => {
     const updateInfo = { status: status, email: rider.email };
-    console.log(rider.email)
+    console.log(rider.email);
     axiosSecure.patch(`rider-approved/${rider._id}`, updateInfo).then((res) => {
       if (res.data.modifiedCount) {
         refetch();
@@ -72,7 +75,8 @@ const ApproveRider = () => {
                 <th>NID</th>
                 <th>Region</th>
                 <th>Age</th>
-                <th>Status</th>
+                <th>Application Status</th>
+                <th>Work Status</th>
                 <th>Actions</th>
               </tr>
             </thead>
@@ -92,6 +96,7 @@ const ApproveRider = () => {
                       <span className="text-green-500">{rider.status}</span>
                     )}
                   </td>
+                  <td>{rider.workStatus}</td>
                   <td>
                     <button
                       onClick={() => handleApproveRider(rider)}

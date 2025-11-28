@@ -11,7 +11,6 @@ const Payment = () => {
     queryKey: ["parcels", id],
     queryFn: async () => {
       const res = await axiosSecure.get(`/parcels/${id}`);
-      console.log(parcel)
       return res.data;
     },
   });
@@ -21,7 +20,7 @@ const Payment = () => {
       cost: parcel.cost,
       parcelId: parcel._id,
       senderEmail: parcel.senderEmail,
-      parcelName: parcel.ParcelName,
+      parcelName: parcel.parcelName,
     };
     const res = await axiosSecure.post("/payment-checkout-session-old", paymentInfo);
     console.log(res.data);
@@ -39,7 +38,7 @@ const Payment = () => {
   return (
     <div>
       <h2>
-        Please Pay {`${parcel.cost}`} for : {parcel.ParcelName}
+        Please Pay {`${parcel.cost}`} for : {parcel.parcelName}
       </h2>
       <button onClick={handlePayment} className="btn btn-primary text-black">
         Pay Now
