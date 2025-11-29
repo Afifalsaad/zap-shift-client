@@ -6,6 +6,7 @@ import { Link, Outlet } from "react-router";
 import useRole from "../hooks/useRole";
 import { LuNotebookPen } from "react-icons/lu";
 import { FaTasks } from "react-icons/fa";
+import { SiGoogletasks } from "react-icons/si";
 
 const DashboardLayout = () => {
   const { role } = useRole();
@@ -112,6 +113,21 @@ const DashboardLayout = () => {
                       <FaTasks />
                       <span className="is-drawer-close:hidden">
                         Assigned Deliveries
+                      </span>
+                    </button>
+                  </li>
+                </Link>
+
+                {/* Completed Tasks */}
+                <Link to={"/dashboard/completed-deliveries"}>
+                  <li>
+                    <button
+                      className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                      data-tip="Completed Deliveries">
+                      {/* Card icon */}
+                      <SiGoogletasks />
+                      <span className="is-drawer-close:hidden">
+                        Completed Deliveries
                       </span>
                     </button>
                   </li>

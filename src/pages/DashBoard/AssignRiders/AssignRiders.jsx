@@ -47,7 +47,6 @@ const AssignRiders = () => {
     axiosSecure
       .patch(`/parcels/${selectedParcel._id}`, riderInfo)
       .then((res) => {
-        console.log(res.data);
         if (res.data.modifiedCount) {
           refetch();
           modalRef.current.close();
