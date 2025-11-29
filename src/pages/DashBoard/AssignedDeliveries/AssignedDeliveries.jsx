@@ -23,6 +23,7 @@ const AssignedDeliveries = () => {
     const statusInfo = {
       riderId: parcel.riderId,
       deliveryStatus: status,
+      trackingId: parcel.trackingId,
     };
 
     const message = `Parcel Status is updated with ${status
@@ -124,7 +125,7 @@ const AssignedDeliveries = () => {
                   <>
                     <td>
                       <button
-                        onClick={() => handleStatusUpdate(parcel, "picked_up")}
+                        onClick={() => handleStatusUpdate(parcel, "picked-up")}
                         className="btn btn-primary text-black mx-2">
                         Mark as Picked Up
                       </button>
