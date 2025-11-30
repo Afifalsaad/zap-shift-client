@@ -51,7 +51,11 @@ const MyParcels = () => {
       parcelName: parcel.parcelName,
       senderEmail: parcel.senderEmail,
       parcelId: parcel._id,
+      trackingId: parcel.trackingId,
     };
+
+    console.log(parcel);
+
     const res = await axiosSecure.post(
       "/payment-checkout-session",
       paymentInfo
@@ -96,7 +100,11 @@ const MyParcels = () => {
                   )}
                 </td>
                 <td>{parcel.deliveryStatus}</td>
-                <td>{parcel.trackingId}</td>
+                <td>
+                  <Link to={`/track-parcel/${parcel.trackingId}`}>
+                    {parcel.trackingId}
+                  </Link>{" "}
+                </td>
                 <td>
                   <button className="btn btn-square hover:bg-primary">
                     <FaMagnifyingGlass />

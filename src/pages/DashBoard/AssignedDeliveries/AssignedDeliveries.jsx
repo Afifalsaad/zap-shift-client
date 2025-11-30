@@ -102,7 +102,7 @@ const AssignedDeliveries = () => {
                 <td>
                   {parcel.deliveryStatus === "pending-pickup" ? (
                     <p className="text-red-500">Rejected</p>
-                  ) : parcel.deliveryStatus === "rider_assigned" ? (
+                  ) : parcel.deliveryStatus === "rider-assigned" ? (
                     <>
                       <button
                         onClick={() =>
