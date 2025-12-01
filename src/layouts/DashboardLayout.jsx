@@ -7,6 +7,7 @@ import useRole from "../hooks/useRole";
 import { LuNotebookPen } from "react-icons/lu";
 import { FaTasks } from "react-icons/fa";
 import { SiGoogletasks } from "react-icons/si";
+import logoImg from "../assets/logo.png";
 
 const DashboardLayout = () => {
   const { role } = useRole();
@@ -52,8 +53,13 @@ const DashboardLayout = () => {
           <ul className="menu w-full grow">
             {/* List item */}
             <li>
+              <Link to="/">
+                <img src={logoImg} alt="" />
+              </Link>
+            </li>
+            <li>
               <Link
-                to="/"
+                to="/dashboard"
                 className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
                 data-tip="Homepage">
                 {/* Home icon */}
