@@ -23,7 +23,6 @@ const Payment = () => {
       parcelName: parcel.parcelName,
     };
     const res = await axiosSecure.post("/payment-checkout-session-old", paymentInfo);
-    console.log(res.data);
     window.location.href = res.data.url;
   };
 

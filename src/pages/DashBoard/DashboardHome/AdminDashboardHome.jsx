@@ -19,7 +19,6 @@ const AdminDashboardHome = () => {
     queryKey: ["delivery-status-stats"],
     queryFn: async () => {
       const res = await axiosSecure.get("/parcels/delivery-status/stats");
-      console.log(res.data);
       return res.data;
     },
   });

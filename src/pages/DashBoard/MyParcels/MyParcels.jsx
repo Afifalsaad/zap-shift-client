@@ -54,12 +54,7 @@ const MyParcels = () => {
       trackingId: parcel.trackingId,
     };
 
-    console.log(parcel);
-
-    const res = await axiosSecure.post(
-      "/payment-checkout-session",
-      parcelInfo
-    );
+    const res = await axiosSecure.post("/payment-checkout-session", parcelInfo);
     window.location.assign(res.data.url);
   };
 

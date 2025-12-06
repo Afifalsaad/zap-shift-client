@@ -61,7 +61,7 @@ const ManageUsers = () => {
             refetch();
             Swal.fire({
               title: "Removed!",
-              text: `${user.name} has been removed admin`,
+              text: `${user.name} has been removed from admin`,
               icon: "success",
             });
           }
